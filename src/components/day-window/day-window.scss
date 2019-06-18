@@ -1,0 +1,13 @@
+.day-block {
+  width: 12%;
+  height: 120px;
+  margin: 5px;
+  border: 2px solid #000;
+  &__number, &__title {
+    margin: 5px;
+  }
+  &__container {
+    height: 100%;
+    width: 100%;
+  }
+}

@@ -12,7 +12,7 @@ export default class DayWindow extends Component {
         state = {
             show: false,
             title: ''
-        }
+        };
 
     handleShow = () => {
         this.setState({ show:  true });
@@ -56,14 +56,20 @@ export default class DayWindow extends Component {
         )
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState == this.state) {
+            this.setState({title: ''});
+        }
+    }
 
     render() {
+        const { day, dayName } = this.props;
         return(
             <div className="day-block">
                 <div onClick={this.handleShow}
                 className="day-block__container">
 
-                    <p className="day-block__number">{this.props.day} {days[this.props.dayName]}</p>
+                    <p className="day-block__number">{day} {days[dayName]}</p>
                     <p className="day-block__title">{this.state.title}</p>
 
                 </div>

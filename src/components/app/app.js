@@ -7,8 +7,6 @@ import './app.scss'
 
 const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь','Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 const date = new Date(new Date().getFullYear(),  new Date().getMonth() + 1, 0); // 1 - 12
-console.log(date);
-console.log(date.getMonth());
 
 
 
@@ -18,7 +16,8 @@ export default class App extends Component {
         month: date.getMonth() + 1,
         day: 0,
         date: date,
-        dateName: months[date.getMonth()]
+        dateName: months[date.getMonth()],
+        dates: []
     };
 
 
@@ -34,7 +33,7 @@ export default class App extends Component {
     };
 
     getPrevMonth = () => {
-        const { year, month } = this.state;
+        const { year, month, date } = this.state;
         if (month === 1) {
             this.setState({
                 year: year - 1,
@@ -46,7 +45,7 @@ export default class App extends Component {
             this.setState({
                 month: month - 1,
                 date: new Date(year, month - 1, 0),
-                dateName: months[month]})
+                dateName: months[date.getMonth() - 1]})
         }
     };
 
@@ -70,8 +69,7 @@ export default class App extends Component {
 
 
     render() {
-        console.log(this.state)
-        const { year, dateName } = this.state;
+        const { year, dateName, dates } = this.state;
         return(
             <div className="container">
                 <div className="container-h2">

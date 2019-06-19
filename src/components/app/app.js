@@ -3,18 +3,19 @@ import { Button } from 'react-bootstrap';
 import DayWindow from '../day-window'
 
 import './app.scss'
-
+// при получении последнего дня месяца при помощи интеджера, значение месяца слетает на минус 1
 
 const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь','Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 const date = new Date(new Date().getFullYear(),  new Date().getMonth() + 1, 0); // 1 - 12
+console.log(date);
+console.log(date.getMonth());
 
 
 
 export default class App extends Component {
-
     state = {
         year: new Date().getFullYear(),
-        month: new Date().getMonth() + 1,
+        month: date.getMonth() + 1,
         day: 0,
         date: date,
         dateName: months[date.getMonth()]
@@ -27,10 +28,8 @@ export default class App extends Component {
 
         for(let i = 1; i <= date.getDate(); i++) {
             let dayName = new Date(year, month - 1, i).getDay() ;
-            console.log(dayName)
             dates.push(<DayWindow key={i} day={i} dayName={dayName}/>);
         }
-        console.log(this.state.month)
         return dates;
     };
 
@@ -57,14 +56,13 @@ export default class App extends Component {
             this.setState({
                 year: year + 1,
                 month: 1,
-                date: new Date(year + 1, 1, 0),
+                date: new Date(year + 1, 1  , 0),
                 dateName: months[0]});
         } else {
             this.setState({
                 month: month + 1,
                 date: new Date(year, month + 1, 0),
                 dateName: months[month]});
-
         }
 
     };
@@ -72,7 +70,7 @@ export default class App extends Component {
 
 
     render() {
-        console.log(this.state.date)
+        console.log(this.state)
         const { year, dateName } = this.state;
         return(
             <div className="container">
